@@ -1,0 +1,50 @@
+Created Models for User, Token, Roles
+Created JwtService, JwtFilter, and SecurityConfig
+
+find book,
+check if isArchived or !shareable
+get user.principal
+if owner == borrower
+
+build a booktransactionHistory
+
+// Implement return a book
+@PatchMapping("/borrow/return/{book-id}")
+returnBorrowedBook
+implement:: transactionhistory findbybookidanduserid
+
+//Implement approve book return
+patch /borrow/return/approve/{book-id}
+approveReturnBorrowedBook - service
+do similar checks
+make sure the book is owned by the connected user - findbybookidandownerid
+Query - transaction.book.owner.id = :userId, returned = true, returnapproved=false;
+setreturnapproved true, save + reutrn id;
+
+
+//implement book cover picture upload
+postmapping value="/cover/{book-id}, consumes = "multipart/form-data"
+
+#spring.datasource.url=jdbc:mysql://localhost:3306/book_social_network
+#spring.jpa.hibernate.ddl-auto=update
+#spring.datasource.username=root
+#spring.datasource.password=SzhengSQL!23
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#spring.jpa.show-sql=false
+#spring.jpa.database=mysql
+#spring.jpa.properties.hibernate.format_sql=true
+#spring.mail.host=localhost
+#spring.mail.port=1025
+#spring.mail.properties.mail.smtp.trust="*"
+#spring.mail.properties.mail.auth=true
+#spring.mail.properties.mail.starttls.enable=true
+#spring.mail.properties.mail.connectiontimeout=5000
+#spring.mail.properties.mail.timeout=3000
+#spring.mail.properties.mail.writetimeout=5000
+#
+
+#spring.jpa.database-platform=o
+#spring.profiles.active=dev
+#spring.servlet.multipart.max-file-size=50MB
+#springdoc.default-produces-media-type=application/json
+#server.servlet.context-path=/api/v1/
