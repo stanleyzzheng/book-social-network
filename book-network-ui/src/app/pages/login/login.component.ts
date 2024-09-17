@@ -36,7 +36,6 @@ export class LoginComponent {
       body: this.authRequest
     }).subscribe({
       next:(res) =>{
-        //todo save the token
         this.tokenService.token = res.token as string;
         this.router.navigate(['books']);
       },
