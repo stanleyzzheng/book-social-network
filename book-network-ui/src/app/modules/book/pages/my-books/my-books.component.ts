@@ -1,25 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {BookService} from "../../../../services/services/book.service";
-import {Router} from "@angular/router";
-import {PageResponseBookResponse} from "../../../../services/models/page-response-book-response";
 import {BookCardComponent} from "../../components/book-card/book-card.component";
+import {PageResponseBookResponse} from "../../../../services/models/page-response-book-response";
+import {BookService} from "../../../../services/services/book.service";
+import {Router, RouterLink} from "@angular/router";
 import {BookResponse} from "../../../../services/models/book-response";
 
 @Component({
-  selector: 'app-book-list',
+  selector: 'app-my-books',
   standalone: true,
   imports: [
-    BookCardComponent
+    BookCardComponent,
+    RouterLink
   ],
-  templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.scss'
+  templateUrl: './my-books.component.html',
+  styleUrl: './my-books.component.scss'
 })
-export class BookListComponent implements OnInit {
+export class MyBooksComponent implements OnInit{
   bookResponse: PageResponseBookResponse = {};
   page: number = 0;
   size: number = 2;
-  message = '';
-  level = 'success';
+
 
   constructor(private bookService: BookService,
               private router: Router) {
@@ -31,7 +31,7 @@ export class BookListComponent implements OnInit {
   }
 
   private findAllBooks() {
-    this.bookService.findAllBooks({
+    this.bookService.findAllBooksByOwner({
       page: this.page,
       size: this.size
     }).subscribe({
@@ -70,22 +70,15 @@ export class BookListComponent implements OnInit {
     return this.page == this.bookResponse.totalPages as number - 1;
   }
 
-  borrowBook(book: BookResponse) {
-    this.message = '';
-    this.bookService.borrowBook({
-      'book-id': book.id as number
-    }).subscribe(
-      {
-        next: () => {
-          this.level= 'success';
-          this.message = 'Book successfully added to your list'
-        },
-        error: (err)=>{
-          console.log(err);
-          this.level='error';
-          this.message= err.error.error;
-        }
-      }
-    )
+  archiveBook($event: BookResponse) {
+
+  }
+
+  shareBook($event: BookResponse) {
+
+  }
+
+  editBook($event: BookResponse) {
+
   }
 }
