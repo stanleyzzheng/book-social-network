@@ -15,31 +15,43 @@
            height="400px" alt="...">
       <div class="mt-2">
         <input (change)="onFileSelected($event)" type="file" class="form-control" id="formFile"
-               accept="image/*">
+               accept="image/*" >
       </div>
     </div>
     <div class="col-9 ">
       <form action="" class="row g-3">
         <div class="col-12">
           <label for="title" class="form-label">Title</label>
-          <input type="text" [(ngModel)]="bookRequest.title" id="title" class="form-control" placeholder="Book title">
+          <input type="text" [(ngModel)]="bookRequest.title" id="title" class="form-control"
+                 placeholder="Book title" name="title">
         </div>
         <div class="col-6">
           <label for="author" class="form-label">Author Name</label>
-          <input type="text" [(ngModel)]="bookRequest.authorName" id="author" class="form-control" placeholder="Author name">
+          <input type="text" [(ngModel)]="bookRequest.authorName" id="author" class="form-control"
+                 placeholder="Author name" name="author">
         </div>
         <div class="col-6">
           <label for="isbn" class="form-label">ISBN #</label>
-          <input type="text" [(ngModel)]="bookRequest.isbn" id="isbn" class="form-control" placeholder="ISBN">
+          <input type="text" [(ngModel)]="bookRequest.isbn" id="isbn" class="form-control"
+                 placeholder="ISBN" name="isbn">
         </div>
         <div class="col-12">
           <label for="synopsis" class="form-label">Synopsis</label>
-          <textarea  [(ngModel)]="bookRequest.synopsis" id="synopsis" rows="4" class="form-control" placeholder="Book synopsis"></textarea>
+          <textarea [(ngModel)]="bookRequest.synopsis" id="synopsis" rows="4" class="form-control"
+                    placeholder="Book synopsis" name="synopsis"></textarea>
         </div>
         <div class="col-12">
-          <input  [(ngModel)]="bookRequest.shareable" type="checkbox" class="form-check-input" id="shareme" placeholder="Book synopsis">
+          <input [(ngModel)]="bookRequest.shareable" type="checkbox" class="form-check-input"
+                 id="shareme"  name="shareable">
           <label for="shareme" class="form-check-label">Share me</label>
-
+        </div>
+        <div class="d-flex justify-content-end gap-2 col-12">
+          <button (click)="saveBook()" type="submit" class="btn btn-outline-primary">
+            <i class="fas fa-save"></i>&nbsp;Save
+          </button>
+          <a routerLink="/books/my-books" class="btn btn-link text-danger">
+            <i class="fas fa-times">&nbsp;Cancel</i>
+          </a>
         </div>
       </form>
     </div>

@@ -1,4 +1,8 @@
-<div class="card" style="width:20rem;">
+<div class="card border-2"
+     style="width:20rem;"
+     [class.border-success]="book.shareable"
+     [class.border-warning]="book.archived"
+>
   <img [src]="bookCover" alt="..." class="card-img-top" height="200">
   <div class="card-body overflow-auto">
     <h5 class="card-title fs-6 text-nowrap fw-bold mb-1">
@@ -19,29 +23,29 @@
   <div class="card-footer d-flex gap-2 justify-content-between align-items-center">
     <div class="d-flex gap-2">
       <app-rating [rating]="book.rate || 0"></app-rating>
-      @if(book.rate || 0> 0){
-      <span class="fw-bold">
-        {{book.rate}}
+      @if (book.rate || 0 > 0) {
+        <span class="fw-bold">
+        {{ book.rate }}
       </span>
       }
-<!--      @else {-->
-<!--        <span></span>-->
-<!--      }-->
+      <!--      @else {-->
+      <!--        <span></span>-->
+      <!--      }-->
     </div>
     @if (!manage) {
 
       <div class="d-flex gap-2">
-        <i (click)="onShowDetails()"  class="fas fa-circle-info text-primary"></i>
-        <i (click)="onBorrow()"  class="fas fa-list-check text-primary"></i>
-        <i  (click)="onAddToWaitingList()" class="fas fa-heart text-danger"></i>
+        <i (click)="onShowDetails()" class="fas fa-circle-info text-primary"></i>
+        <i (click)="onBorrow()" class="fas fa-list-check text-primary"></i>
+        <i (click)="onAddToWaitingList()" class="fas fa-heart text-danger"></i>
       </div>
     }
     @if (manage) {
 
       <div class="d-flex gap-2">
-        <i (click)="onEdit()"  class="fas fa-edit text-success"></i>
-        <i (click)="onShare()"  class="fas fa-share-nodes text-primary"></i>
-        <i (click)="onArchive()"  class="fas fa-archive text-danger"></i>
+        <i (click)="onEdit()" class="fas fa-edit text-success"></i>
+        <i (click)="onShare()" class="fas fa-share-nodes text-primary"></i>
+        <i (click)="onArchive()" class="fas fa-archive text-danger"></i>
       </div>
     }
 
