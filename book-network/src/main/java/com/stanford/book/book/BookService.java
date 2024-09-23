@@ -34,6 +34,19 @@ public class BookService {
         return bookRepository.save(book)
                 .getId();
     }
+    public Integer updateBook(BookRequest request, Integer bookId, Authentication connectedUser) {
+        Book book = bookRepository.findById(bookId).orElseThrow(
+                ()-> new EntityNotFoundException("No book found with the id:: " + bookId)
+        );
+        User user = ((User) connectedUser.getPrincipal());
+        if (!Objects.equals(user.getId(), book.getOwner()
+                .getId())) {
+            throw new OperationNotPermittedException("You cannot edit/update books that aren't yours");
+        }
+        Book bookUpdate = bookMapper.toBook(request);
+        bookUpdate.setOwner(user);
+        return bookRepository.save(bookUpdate).getId();
+    }
 
     public BookResponse findById(Integer bookId) {
         return bookRepository.findById(bookId)
@@ -236,4 +249,6 @@ public class BookService {
         book.setBookCover(bookCover);
         bookRepository.save(book);
     }
+
+
 }
