@@ -34,10 +34,12 @@ public class BookService {
         return bookRepository.save(book)
                 .getId();
     }
+
     public Integer updateBook(BookRequest request, Integer bookId, Authentication connectedUser) {
-        Book book = bookRepository.findById(bookId).orElseThrow(
-                ()-> new EntityNotFoundException("No book found with the id:: " + bookId)
-        );
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(
+                        () -> new EntityNotFoundException("No book found with the id:: " + bookId)
+                );
         User user = ((User) connectedUser.getPrincipal());
         if (!Objects.equals(user.getId(), book.getOwner()
                 .getId())) {
@@ -45,7 +47,12 @@ public class BookService {
         }
         Book bookUpdate = bookMapper.toBook(request);
         bookUpdate.setOwner(user);
-        return bookRepository.save(bookUpdate).getId();
+        if (request.bookCover() == null) {
+            bookUpdate.setBookCover(book.getBookCover());
+        }
+        System.out.println(book.getBookCover());
+        return bookRepository.save(bookUpdate)
+                .getId();
     }
 
     public BookResponse findById(Integer bookId) {

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {BookCardComponent} from "../../components/book-card/book-card.component";
 import {PageResponseBookResponse} from "../../../../services/models/page-response-book-response";
-import {BookService} from "../../../../services/services/book.service";
+// import {BookService} from "../../../../services/services/book.service";
 import {Router, RouterLink} from "@angular/router";
 import {BookResponse} from "../../../../services/models/book-response";
+import {BookService} from "../../../../book/book.service";
 
 @Component({
   selector: 'app-my-books',

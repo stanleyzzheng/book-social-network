@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {BookRequest} from "../../../../services/models/book-request";
 import {FormsModule} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {BookService} from "../../../../services/services/book.service";
-
+import {BookService} from "../../../../book/book.service";
+// import {BookService} from "../../../../services/services/book.service";
+// import {BookService}
 @Component({
   selector: 'app-manage-book',
   standalone: true,
@@ -18,7 +19,7 @@ export class ManageBookComponent implements OnInit {
   errorMsg: Array<string> = [];
   selectedPicture: string | undefined;
   selectedBookCover: any;
-  bookRequest: BookRequest = {authorName: "", isbn: "", synopsis: "", title: "" };
+  bookRequest: BookRequest = {authorName: "", isbn: "", synopsis: "", title: "", bookCover:"" };
 
   constructor(private bookService: BookService, private router: Router,
               private activatedRoute: ActivatedRoute) {
@@ -38,10 +39,10 @@ export class ManageBookComponent implements OnInit {
             authorName: book.authorName as string,
             isbn: book.isbn as string,
             synopsis: book.synopsis as string,
-            shareable: book.shareable
-            // bookCover: book.cover as unknown as string
+            shareable: book.shareable,
+            bookCover: book.cover as unknown as string
           }
-          console.log(book.cover);
+          // console.log(book.cover);
           if (book.cover) {
             this.selectedPicture = 'data:image/jpg;base64, ' + book.cover;
           }
@@ -62,6 +63,9 @@ export class ManageBookComponent implements OnInit {
       }
       reader.readAsDataURL(this.selectedBookCover);
     }
+  }
+  updateBook() {
+    this.bookService
   }
 
   saveBook() {

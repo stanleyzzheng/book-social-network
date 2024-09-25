@@ -9,5 +9,5 @@ export interface BookRequest {
   shareable?: boolean;
   synopsis: string;
   title: string;
-  // bookCover?: string;
+  bookCover?: string;
 }
